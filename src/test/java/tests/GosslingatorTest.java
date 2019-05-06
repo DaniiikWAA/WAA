@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.sql.SQLOutput;
+
 
 public class GosslingatorTest {
     WebDriver driver;
@@ -50,57 +52,23 @@ public class GosslingatorTest {
     @Test
     public void itShouldChecktheMessage() {
         WebElement addRyanButton = driver.findElement(By.id("addRyan"));
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
-        addRyanButton.click();
+        for (int i = 0; i < 50; i++) {
+            addRyanButton.click();
+            String actualNumberOfRyans = driver.findElement(By.id("ryanCounter")).getText();
+            Assert.assertEquals(String.valueOf(i + 1), actualNumberOfRyans);
+
+            //overit sklonovanie pomocou podmienky
+            String actualDescription = driver.findElement(By.cssSelector("div.ryan-counter h3")).getText();
+            if (i + 1 == 1 ) {
+                Assert.assertEquals("ryan", actualDescription);
+            }
+            if (i + 1 >= 2) {
+                Assert.assertEquals("ryans", actualDescription);
+            }
+            System.out.println("index i = " + i);
+            System.out.println("pocet ryanov = " + actualNumberOfRyans);
+        }
+
         Assert.assertEquals("50", driver.findElement(By.cssSelector("div.ryan-counter h2")).getText());
         System.out.println("Number of Ryans: " + driver.findElement(By.cssSelector("div.ryan-counter h2")).getText());
         Assert.assertEquals("ryans", driver.findElement(By.cssSelector("div.ryan-counter h3")).getText());
@@ -109,6 +77,20 @@ public class GosslingatorTest {
                 "RYANS\n" +
                 "IS TOO DAMN\n" +
                 "HIGH", driver.findElement(By.cssSelector("h1.tooManyRyans")).getText());
+    }
+
+    //testovanie sa stopne po 30 klikoch
+    @Test
+    public void itShouldDisplayWarningMessageUsingWhileCycle() {
+        WebElement addRyanButton = driver.findElement(By.id("addRyan"));
+        String actualNumberOfRyans = driver.findElement(By.id("ryanCounter")).getText();
+        int clickslimit = 30;
+        int clicks = 0;
+        while (!actualNumberOfRyans.equals("50")&& clicks <= clickslimit){
+            addRyanButton.click();
+            actualNumberOfRyans = driver.findElement(By.id("ryanCounter")).getText();
+            clicks++;
+        }
     }
 
     @Test
