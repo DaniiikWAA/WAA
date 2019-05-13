@@ -67,6 +67,10 @@ public class GosslingatorTest {
             }
             System.out.println("index i = " + i);
             System.out.println("pocet ryanov = " + actualNumberOfRyans);
+
+            //overit pocet obrazkov Ryana
+            int numberOfRyanImages = driver.findElements(By.cssSelector("img")).size();
+            Assert.assertEquals(i + 1, numberOfRyanImages);
         }
 
         Assert.assertEquals("50", driver.findElement(By.cssSelector("div.ryan-counter h2")).getText());
@@ -107,4 +111,5 @@ public class GosslingatorTest {
         Assert.assertEquals("2", actualNumberOfRyans);
         Assert.assertEquals("ryans", actualRyanDescription);
     }
+
 }
