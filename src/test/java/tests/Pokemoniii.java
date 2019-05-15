@@ -1,5 +1,6 @@
 package tests;
 
+import base.TestBase;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,21 +11,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class Pokemoniii {
-        WebDriver driver;
+public class Pokemoniii extends TestBase {
 
         @Before
-        public void setUp(){
-            System.setProperty("webdriver.chrome.driver", "chromedriver74.exe");
-            driver = new ChromeDriver();
-            driver.get("http://localhost:81/vybersi.php");
-        }
-
-        @After
-        public void tearDown(){
-            driver.close();
-            driver.quit();
-            System.out.println("koniec");
+        public void openPage(){
+            driver.get(BASE_URL + "/vybersi.php");
         }
 
         //test na vybratie pikachu a overenie textu
@@ -40,5 +31,22 @@ public class Pokemoniii {
                 String expectedMessage = "I choose you " + pokemon + " !";
                 Assert.assertEquals(expectedMessage, actualMessage);
             }
+            }
+
+            @Test
+                 public void xpathtestuloha() {
+                System.setProperty("webdriver.chrome.driver", "chromedriver74.exe");
+                driver = new ChromeDriver();
+                driver.get("http://localhost:81/xpathtrainingcenter.php");
+                 String[] selectedOptions = {"moznost 1", "moznost 2", "moznost 3", "moznost 4","moznost 5", "moznost 6"};
+                 WebElement optionSelect = driver.findElement(By.xpath("/html/body/div/div[2]/div/div/select[1]"));
+
+                 for (String options : selectedOptions) {
+                     new Select(optionSelect).selectByVisibleText(options);
+                     String actualMessage = driver.findElement(By.xpath("/html/body/div/div[4]/div/div/h2/span")).getText();
+                     String expectedMessage = "you have chosen " + options;
+                     Assert.assertEquals(expectedMessage, actualMessage);
+                 }
+
             }
 }
