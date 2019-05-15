@@ -1,5 +1,6 @@
 package tests;
 
+import base.TestBase;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,24 +10,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.sql.SQLOutput;
+public class GosslingatorTest extends TestBase {
 
-
-public class GosslingatorTest {
-    WebDriver driver;
+    protected String actualNumberOfRyans;
 
     @Before
-    public void setUp(){
-        System.setProperty("webdriver.chrome.driver", "chromedriver74.exe");
-        driver = new ChromeDriver();
-        driver.get("http://localhost:81/gosslingator.php");
-    }
-
-    @After
-    public void tearDown(){
-        driver.close();
-        driver.quit();
-        System.out.println("koniec");
+    public void openPage(){
+        driver.get(BASE_URL + "/gosslingator.php");
     }
 
     @Test
