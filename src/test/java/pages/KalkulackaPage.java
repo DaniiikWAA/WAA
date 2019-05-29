@@ -33,4 +33,13 @@ public class KalkulackaPage {
     public void resetNumbers() {
         pageDriver.findElement(By.id("reset")).click();
     }
+
+    public void multiplyNumbers () {
+        pageDriver.findElement(By.id("multiply")).click();
+    }
+
+    public void divideNumbers () {
+        pageDriver.findElement(By.id("divide")).click();
+    }
+
 }
