@@ -12,45 +12,45 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import pages.KalkulackaPage;
 
 public class Kalkulacka extends TestBase {
+    private KalkulackaPage KalkulackaPage;
 
     @Before
     public void openPage(){
         driver.get(BASE_URL + "/kalkulacka.php");
+        KalkulackaPage = new KalkulackaPage(driver);
     }
 
     //spocitanie
     @Test
     public void itShouldSumUp() {
 
-
-        driver.findElement(By.id("firstInput")).sendKeys("1");
-        driver.findElement(By.id("secondInput")).sendKeys("2");
-        driver.findElement(By.id("count")).click();
-        //driver.findElement(By.id("result")).isDisplayed();
-        Assert.assertEquals("3", driver.findElement(By.id("result")).getText());
+        KalkulackaPage.enterFirstInput("1");
+        KalkulackaPage.enterSecondInput("2");
+        KalkulackaPage.sumNumbers();
+       Assert.assertEquals("3", KalkulackaPage.getResult());
 
     }
+
 
    //odpocitanie
    @Test
    public void itShouldDeduct() {
-       driver.findElement(By.id("firstInput")).sendKeys("2");
-       driver.findElement(By.id("secondInput")).sendKeys("1");
-       driver.findElement(By.id("deduct")).click();
-       //driver.findElement(By.id("result")).isDisplayed();
-       Assert.assertEquals("1", driver.findElement(By.id("result")).getText());
+       KalkulackaPage.enterFirstInput("3");
+       KalkulackaPage.enterSecondInput("2");
+       KalkulackaPage.deductNumbers();
+       Assert.assertEquals("1", KalkulackaPage.getResult());
    }
 
    //resetovanie kalkulacky
     @Test
     public void itShouldResetNumbers() {
-        driver.findElement(By.id("firstInput")).sendKeys("2");
-        driver.findElement(By.id("secondInput")).sendKeys("1");
-        driver.findElement(By.id("deduct")).click();
-        //driver.findElement(By.id("result")).isDisplayed();
-        driver.findElement(By.id("reset")).click();
+        KalkulackaPage.enterFirstInput("1");
+        KalkulackaPage.enterSecondInput("2");
+        KalkulackaPage.deductNumbers();
+        KalkulackaPage.resetNumbers();
         Assert.assertTrue(driver.findElement(By.id("firstInput")).getAttribute("value").isEmpty());
         Assert.assertTrue(driver.findElement(By.id("secondInput")).getAttribute("value").isEmpty());
     }
@@ -58,10 +58,9 @@ public class Kalkulacka extends TestBase {
     //posledne vysledky
     @Test
     public void itSHouldDisplayLastResults() {
-        driver.findElement(By.id("firstInput")).sendKeys("2");
-        driver.findElement(By.id("secondInput")).sendKeys("1");
-        driver.findElement(By.id("deduct")).click();
-        //driver.findElement(By.id("result")).isDisplayed();
+        KalkulackaPage.enterFirstInput("2");
+        KalkulackaPage.enterSecondInput("1");
+        KalkulackaPage.deductNumbers();
         Assert.assertEquals(
                 "2-1 = 1",
                 driver.findElement(By.cssSelector("ul.latest-results li")).getText());
