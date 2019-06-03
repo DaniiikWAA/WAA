@@ -22,8 +22,8 @@ public class SavingsCalculatorTest extends TestBase {
     public void applyButtonIsEnabled() {
         SavingsCalculatorPage.enterInput();
         SavingsCalculatorPage.enterInvestInput("1000");
-        SavingsCalculatorPage.enterYearsInput("5");
-        SavingsCalculatorPage.enterEmailInput("Dana@gmail.com");
+        SavingsCalculatorPage.years("5");
+        SavingsCalculatorPage.email("Dana@gmail.com");
         Assert.assertTrue(driver.findElement(By.xpath("//button")).isEnabled());
         }
 
@@ -32,8 +32,8 @@ public class SavingsCalculatorTest extends TestBase {
     public void sumsShouldntBeEmpty() {
         SavingsCalculatorPage.enterInput();
         SavingsCalculatorPage.enterInvestInput("1000");
-        SavingsCalculatorPage.enterYearsInput("5");
-        SavingsCalculatorPage.enterEmailInput("Dana@gmail.com");
+        SavingsCalculatorPage.years("5");
+        SavingsCalculatorPage.email("Dana@gmail.com");
 
         WebElement container = driver.findElement(By.cssSelector("div.result"));
 
@@ -49,8 +49,8 @@ public class SavingsCalculatorTest extends TestBase {
     public void riskShouldNotBeEmpty() {
         SavingsCalculatorPage.enterInput();
         SavingsCalculatorPage.enterInvestInput("1000");
-        SavingsCalculatorPage.enterYearsInput("5");
-        SavingsCalculatorPage.enterEmailInput("Dana@gmail.com");
+        SavingsCalculatorPage.years("5");
+        SavingsCalculatorPage.email("Dana@gmail.com");
 
         WebElement container = driver.findElement(By.cssSelector("div.result"));
         System.out.println(container.findElement(By.xpath("./div[3]/p")).getText());
@@ -62,8 +62,8 @@ public class SavingsCalculatorTest extends TestBase {
     public void requestsAreDisplayed() {
         SavingsCalculatorPage.enterInput();
         SavingsCalculatorPage.enterInvestInput("1000");
-        SavingsCalculatorPage.enterYearsInput("5");
-        SavingsCalculatorPage.enterEmailInput("Dana@gmail.com");
+        SavingsCalculatorPage.years("5");
+        SavingsCalculatorPage.email("Dana@gmail.com");
         SavingsCalculatorPage.clickButton();
         Assert.assertTrue(driver.findElement(By.xpath("//div/div[2]/h2")).isDisplayed());
         Assert.assertTrue(driver.findElement(By.xpath("//div/div[2]/p")).isDisplayed());
