@@ -20,12 +20,7 @@ public class SavingsCalculatorTest extends TestBase {
 
     @Test
     public void applyButtonIsEnabled() {
-        String[] selectedOptions = {"Handelsbanken Aktiv 100", "Hoggwart's Fund", "Fellowship investment group", "McDuck's safe", "Batman's Cave Development", "Death Star real estate", "Tom & Jerry corp"};
-        WebElement optionSelect = driver.findElement(By.id("fundSelect"));
-        for (String options : selectedOptions) {
-            new Select(optionSelect).selectByVisibleText(options);
-        }
-
+        SavingsCalculatorPage.enterInput();
         SavingsCalculatorPage.enterInvestInput("1000");
         SavingsCalculatorPage.enterYearsInput("5");
         SavingsCalculatorPage.enterEmailInput("Dana@gmail.com");
@@ -35,12 +30,7 @@ public class SavingsCalculatorTest extends TestBase {
 
     @Test
     public void sumsShouldntBeEmpty() {
-        String[] selectedOptions = {"Handelsbanken Aktiv 100", "Hoggwart's Fund", "Fellowship investment group", "McDuck's safe", "Batman's Cave Development", "Death Star real estate", "Tom & Jerry corp"};
-        WebElement optionSelect = driver.findElement(By.id("fundSelect"));
-        for (String options : selectedOptions) {
-            new Select(optionSelect).selectByVisibleText(options);
-        }
-
+        SavingsCalculatorPage.enterInput();
         SavingsCalculatorPage.enterInvestInput("1000");
         SavingsCalculatorPage.enterYearsInput("5");
         SavingsCalculatorPage.enterEmailInput("Dana@gmail.com");
@@ -52,16 +42,12 @@ public class SavingsCalculatorTest extends TestBase {
 
         Assert.assertFalse(container.findElement(By.xpath("./div[1]/p")).getText().isEmpty());
         Assert.assertFalse(container.findElement(By.xpath("./div[2]/p")).getText().isEmpty());
+
     }
 
     @Test
     public void riskShouldNotBeEmpty() {
-        String[] selectedOptions = {"Handelsbanken Aktiv 100", "Hoggwart's Fund", "Fellowship investment group", "McDuck's safe", "Batman's Cave Development", "Death Star real estate", "Tom & Jerry corp"};
-        WebElement optionSelect = driver.findElement(By.id("fundSelect"));
-        for (String options : selectedOptions) {
-            new Select(optionSelect).selectByVisibleText(options);
-        }
-
+        SavingsCalculatorPage.enterInput();
         SavingsCalculatorPage.enterInvestInput("1000");
         SavingsCalculatorPage.enterYearsInput("5");
         SavingsCalculatorPage.enterEmailInput("Dana@gmail.com");
@@ -74,16 +60,11 @@ public class SavingsCalculatorTest extends TestBase {
 
     @Test
     public void requestsAreDisplayed() {
-        String[] selectedOptions = {"Handelsbanken Aktiv 100", "Hoggwart's Fund", "Fellowship investment group", "McDuck's safe", "Batman's Cave Development", "Death Star real estate", "Tom & Jerry corp"};
-        WebElement optionSelect = driver.findElement(By.id("fundSelect"));
-        for (String options : selectedOptions) {
-            new Select(optionSelect).selectByVisibleText(options);
-        }
-
+        SavingsCalculatorPage.enterInput();
         SavingsCalculatorPage.enterInvestInput("1000");
         SavingsCalculatorPage.enterYearsInput("5");
         SavingsCalculatorPage.enterEmailInput("Dana@gmail.com");
-        driver.findElement(By.xpath("//button")).click();
+        SavingsCalculatorPage.clickButton();
         Assert.assertTrue(driver.findElement(By.xpath("//div/div[2]/h2")).isDisplayed());
         Assert.assertTrue(driver.findElement(By.xpath("//div/div[2]/p")).isDisplayed());
     }
