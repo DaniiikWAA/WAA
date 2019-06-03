@@ -7,12 +7,15 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import pages.SavingsCalculatorPage;
 
 public class SavingsCalculatorTest extends TestBase {
+    private SavingsCalculatorPage SavingsCalculatorPage;
 
     @Before
     public void openPage() {
         driver.get(BASE_URL + "/savingscalculator.php");
+        SavingsCalculatorPage = new SavingsCalculatorPage(driver);
     }
 
     @Test
@@ -23,11 +26,12 @@ public class SavingsCalculatorTest extends TestBase {
             new Select(optionSelect).selectByVisibleText(options);
         }
 
-        driver.findElement(By.id("oneTimeInvestmentInput")).sendKeys("1000");
-        driver.findElement(By.id("yearsInput")).sendKeys("5");
-        driver.findElement(By.id("emailInput")).sendKeys("d.haj@gmail.com");
+        SavingsCalculatorPage.enterInvestInput("1000");
+        SavingsCalculatorPage.enterYearsInput("5");
+        SavingsCalculatorPage.enterEmailInput("Dana@gmail.com");
         Assert.assertTrue(driver.findElement(By.xpath("//button")).isEnabled());
-    }
+        }
+
 
     @Test
     public void sumsShouldntBeEmpty() {
@@ -37,9 +41,9 @@ public class SavingsCalculatorTest extends TestBase {
             new Select(optionSelect).selectByVisibleText(options);
         }
 
-        driver.findElement(By.id("oneTimeInvestmentInput")).sendKeys("1000");
-        driver.findElement(By.id("yearsInput")).sendKeys("5");
-        driver.findElement(By.id("emailInput")).sendKeys("d.haj@gmail.com");
+        SavingsCalculatorPage.enterInvestInput("1000");
+        SavingsCalculatorPage.enterYearsInput("5");
+        SavingsCalculatorPage.enterEmailInput("Dana@gmail.com");
 
         WebElement container = driver.findElement(By.cssSelector("div.result"));
 
@@ -58,9 +62,9 @@ public class SavingsCalculatorTest extends TestBase {
             new Select(optionSelect).selectByVisibleText(options);
         }
 
-        driver.findElement(By.id("oneTimeInvestmentInput")).sendKeys("1000");
-        driver.findElement(By.id("yearsInput")).sendKeys("5");
-        driver.findElement(By.id("emailInput")).sendKeys("d.haj@gmail.com");
+        SavingsCalculatorPage.enterInvestInput("1000");
+        SavingsCalculatorPage.enterYearsInput("5");
+        SavingsCalculatorPage.enterEmailInput("Dana@gmail.com");
 
         WebElement container = driver.findElement(By.cssSelector("div.result"));
         System.out.println(container.findElement(By.xpath("./div[3]/p")).getText());
@@ -76,9 +80,9 @@ public class SavingsCalculatorTest extends TestBase {
             new Select(optionSelect).selectByVisibleText(options);
         }
 
-        driver.findElement(By.id("oneTimeInvestmentInput")).sendKeys("1000");
-        driver.findElement(By.id("yearsInput")).sendKeys("5");
-        driver.findElement(By.id("emailInput")).sendKeys("d.haj@gmail.com");
+        SavingsCalculatorPage.enterInvestInput("1000");
+        SavingsCalculatorPage.enterYearsInput("5");
+        SavingsCalculatorPage.enterEmailInput("Dana@gmail.com");
         driver.findElement(By.xpath("//button")).click();
         Assert.assertTrue(driver.findElement(By.xpath("//div/div[2]/h2")).isDisplayed());
         Assert.assertTrue(driver.findElement(By.xpath("//div/div[2]/p")).isDisplayed());
